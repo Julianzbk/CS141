@@ -34,6 +34,7 @@ class Circle extends Shape
         df.setMaximumFractionDigits(2);
     }
     
+    /*
     static String center(String s, int n)
     {
         int spaceSize = n - s.length();
@@ -59,6 +60,12 @@ class Circle extends Shape
             int width = (int) Math.round(Math.sqrt(Math.pow(radius, 2) - Math.pow(i, 2)));
             System.out.println(center("* ".repeat(width * 2 + 1), maxWidth * 2));        
         }
+    }
+    */
+
+    void draw()
+    {
+        System.out.println("*"); // .repeat() is illegal ig
     }
 
     double area()
@@ -91,11 +98,14 @@ class Triangle extends Shape
         int width = 1;
         for (int i = 0; i < height; ++i)
         {
-            System.out.println("* ".repeat(width));
+            for (int w = 0; w < height; ++w)
+                System.out.print("* ");
+            System.out.println();
             if (i % (int) Math.ceil(slope) == 0)
                 width += (int) (1 / slope);
         }
-        System.out.print("* ".repeat(base));
+        for (int b = 0; b < base; ++b)
+            System.out.print("* ");
     }
 
     double area()
@@ -129,13 +139,19 @@ class Square extends Shape
 
     void draw()
     {
-        System.out.println("* ".repeat(length));
+        for (int l = 0; l < length; ++l)
+            System.out.print("* ");
+        System.out.println();
         for (int i = 1; i < length - 1; ++i)
         {
-            System.out.println("* " + " ".repeat((length - 2) * 2) + "*");
+            System.out.print("* ");
+            for (int l = 0; l < length - 2; ++l)
+                System.out.print("  ");
+            System.out.println("*");
         }
         if (length > 1)
-            System.out.print("* ".repeat(length));
+            for (int l = 0; l < length; ++l)
+                System.out.print("* ");
     }
     
     double area()
@@ -168,16 +184,22 @@ class Rectangle extends Square
     void draw()
     {
         if (length > 0)
-            System.out.println("* ".repeat(width));
+            for (int w = 0; w < width; ++w)
+                System.out.print("* ");
+            System.out.println();
         for (int i = 1; i < length - 1; ++i)
         {
             if (width == 1)
                 System.out.println("* ");
             else
-                System.out.println("* " + " ".repeat((width - 2) * 2) + "*");
+                System.out.print("* ");
+                for (int w = 0; w < width - 2; ++w)
+                    System.out.print("  ");
+                System.out.println("*");
         }
         if (length > 1)
-            System.out.print("* ".repeat(width));
+            for (int w = 0; w < width; ++w)
+                System.out.print("* ");
     }
     
     double area()
@@ -297,32 +319,6 @@ class Picture
 
 public class mainClass
 {
-    void test()
-    {
-        Square sq = new Square("sqarue", 2);
-        sq.print();
-        sq.draw();
-        
-        System.out.println("-".repeat(20));
-        Picture pic0 = new Picture();
-        pic0.add(sq);
-        pic0.add(new Circle("circ", 3));
-        pic0.printAll();
-        pic0.drawAll();
-        System.out.println(pic0.totalArea());
-        
-        System.out.println("-".repeat(20));
-        Picture pic = new Picture();
-        pic.add(new Triangle("tri1", 3, 2));
-        pic.add(new Triangle("tri2", 2, 6));
-        pic.add(new Circle("cir1", 5));
-        pic.add(new Circle("cir2", 1));
-        pic.add(new Square("sqr1", 1));
-        pic.add(new Square("sqr2", 5));
-        pic.add(new Rectangle("rec1", 5, 3));
-        pic.add(new Rectangle("rec2", 1, 3));
-    }
-
     public static void main(String[] args)
     {
         int arg1 = Integer.parseInt(args[0]);
