@@ -98,7 +98,7 @@ class Triangle extends Shape
         int width = 1;
         for (int i = 0; i < height; ++i)
         {
-            for (int w = 0; w < height; ++w)
+            for (int w = 0; w < width; ++w)
                 System.out.print("* ");
             System.out.println();
             if (i % (int) Math.ceil(slope) == 0)
@@ -192,10 +192,12 @@ class Rectangle extends Square
             if (width == 1)
                 System.out.println("* ");
             else
+            {
                 System.out.print("* ");
                 for (int w = 0; w < width - 2; ++w)
                     System.out.print("  ");
                 System.out.println("*");
+            }
         }
         if (length > 1)
             for (int w = 0; w < width; ++w)
