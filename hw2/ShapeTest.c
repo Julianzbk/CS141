@@ -83,7 +83,7 @@ void Circle_Circle(Circle* _this, const char* name, int radius)
 
 void Circle_draw(Circle* _this)
 {
-    cout << "*" << endl; // this is a circle i swear
+    cout << "**\n**" << endl ; // this is a circle i swear
 }
 
 double Circle_area(Circle* _this)
@@ -93,8 +93,12 @@ double Circle_area(Circle* _this)
 
 void Circle_print(Circle* _this)
 {
-    cout << _this->super->name << "(" << _this->radius << "): "
-         << (_this->v_ptr[AREA_INDEX].double_method)(_this) << endl;
+    double area = (_this->v_ptr[AREA_INDEX].double_method)(_this);
+    cout << _this->super->name << "(" << _this->radius << ") : ";
+    if (area == (int) area)
+        cout << std::fixed << std::setprecision(0) << area << endl;
+    else
+        cout << std::fixed << std::setprecision(2) << area << endl;
 }
 
 void Circle_Destructor(Circle* _this)
@@ -157,8 +161,12 @@ double Triangle_area(Triangle* _this)
 
 void Triangle_print(Triangle* _this)
 {
-    cout << _this->super->name << "(" << _this->base << ", " << _this->height << "): "
-         << (_this->v_ptr[AREA_INDEX].double_method)(_this) << endl;
+    double area = (_this->v_ptr[AREA_INDEX].double_method)(_this);
+    cout << _this->super->name << "(" << _this->base << ", " << _this->height << ") : ";
+    if (area == (int) area)
+        cout << std::fixed << std::setprecision(0) << area << endl;
+    else
+        cout << std::fixed << std::setprecision(2) << area << endl;
 }
 
 void Triangle_Destructor(Triangle* _this)
@@ -218,8 +226,12 @@ double Square_area(Square* _this)
 
 void Square_print(Square* _this)
 {
-    cout << _this->super->name << "(" << _this->length << "): "
-         << (_this->v_ptr[AREA_INDEX].double_method)(_this) << endl;
+    double area = (_this->v_ptr[AREA_INDEX].double_method)(_this);
+    cout << _this->super->name << "(" << _this->length << ") : ";
+    if (area == (int) area)
+        cout << std::fixed << std::setprecision(0) << area << endl;
+    else
+        cout << std::fixed << std::setprecision(2) << area << endl;
 }
 
 void Square_Destructor(Square* _this)
@@ -289,8 +301,12 @@ double Rectangle_area(Rectangle* _this)
 
 void Rectangle_print(Rectangle* _this)
 {
-    cout << _this->super->name << "(" << _this->length << ", " << _this->width << "): "
-         << (_this->v_ptr[AREA_INDEX].double_method)(_this) << endl;
+    double area = (_this->v_ptr[AREA_INDEX].double_method)(_this);
+    cout << _this->super->name << "(" << _this->length << ", " << _this->width << ") : ";
+    if (area == (int) area)
+        cout << std::fixed << std::setprecision(0) << area << endl;
+    else
+        cout << std::fixed << std::setprecision(2) << area << endl;
 }
 
 void Rectangle_Destructor(Rectangle* _this)
@@ -342,20 +358,21 @@ int main(int argc, char* argv[])
     int arg1 = atoi(argv[1]);
     int arg2 = atoi(argv[2]);
     //cout << arg1 << ", " << arg2 << endl;
-    Circle cir1, cir2;
-    Circle_Circle(&cir1, "FirstCircle", arg1);
-    Circle_Circle(&cir2, "SecondCircle", arg2);
+    cout << std::fixed;
     Triangle tri1, tri2;
     Triangle_Triangle(&tri1, "FirstTriangle", arg1, arg2);
     Triangle_Triangle(&tri2, "SecondTriangle", arg1 - 1, arg2 - 1);
+    Circle cir1, cir2;
+    Circle_Circle(&cir1, "FirstCircle", arg1);
+    Circle_Circle(&cir2, "SecondCircle", arg1 - 1);
     Square sq1, sq2;
-    Square_Square(&sq1, "FirstSqaure", arg1);
+    Square_Square(&sq1, "FirstSquare", arg1);
     Square_Square(&sq2, "SecondSquare", arg1 - 1);
     Rectangle re1, re2;
     Rectangle_Rectangle(&re1, "FirstRectangle", arg1, arg2);
     Rectangle_Rectangle(&re2, "SecondRectangle", arg1 - 1, arg2 - 1);
 
-    Shape* pic[] = {(Shape*) &cir1, (Shape*) &cir2, (Shape*) &tri1, (Shape*) &tri2,
+    Shape* pic[] = {(Shape*) &tri1, (Shape*) &tri2, (Shape*) &cir1, (Shape*) &cir2,
                     (Shape*) &sq1, (Shape*) &sq2, (Shape*) &re1, (Shape*) &re2};
     size_t pic_len = sizeof(pic) / sizeof(Shape*);
     printAll(pic, pic_len);
