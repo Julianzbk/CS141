@@ -1,0 +1,38 @@
+(defun MY-LENGTH (L)
+    (cond 
+        ((null L) 0)
+        (T (+ (MY-LENGTH (cdr L)) 1))
+    )
+)
+
+(defun MY-MEMQ (A L)
+    (cond
+        ((null L)           NIL)
+        ((equal A (car L))  L  )
+        (T (MY-MEMQ A (cdr L)) )
+    )
+)
+
+(defun MY-APPEND (L1 L2)
+    (cond
+        ((null L1)  L2)
+        ((null L2)  L1)
+        (T          (cons (car L1) (MY-APPEND (cdr L1) L2)))
+    )
+    
+)
+
+(defun MY-CONCAT (L1 A)
+    (cond
+        ((null L1)  (cons A nil))
+        (T          (cons (car L1) (MY-CONCAT (cdr L1) A)))
+    )
+)
+
+(defun MY-REVERSE (L)
+    (cond
+        ((null L)   NIL)
+        (T          (cons (MY-REVERSE (cdr L)) (car L))
+        )
+    )
+)
