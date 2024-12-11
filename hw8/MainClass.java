@@ -118,7 +118,7 @@ class FileInfo
 
     public String toString()
     {
-        return "File(" + Integer.toString(diskNumber) + ", " + Integer.toString(startingSector) +
+        return "File(" + Integer.toString(diskNumber) + ", " .toString(startingSector) +
                ", " + Integer.toString(fileLength) + ")";
     }
 }
@@ -240,7 +240,6 @@ class UserThread
             {
                 break;
             }
-            line = line.split(" ")[1];
             OS.disks[diskNumber].write(startingSector + file_length, new StringBuffer(line));
             OS.disk_manager.increment(diskNumber);
         }
@@ -264,11 +263,11 @@ class UserThread
             //System.out.println("reading>> " + line);
             if (line.contains(".save"))
             {
-                save(line.substring(line.indexOf('A')));
+                save(line.split(" ")[1]);
             }
             else if (line.contains(".print"))
             {
-                print(line.substring(line.indexOf('A')));
+                print(line.split(" ")[1]);
                 
             }
             else
